@@ -33,10 +33,15 @@ const NavBar = (props) => {
 
   const { user, isAuthenticated } = useAuth0();
 
+  const handleClick = () => {
+    
+  }
+
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
+      {isAuthenticated && (
         <List>
             <ListItem key='my-events' disablePadding>
                 <ListItemButton>
@@ -55,16 +60,24 @@ const NavBar = (props) => {
                 </ListItemButton>
             </ListItem>
         </List>
+      )}
       <Divider />
       <List>
-          <ListItem key='logout' disablePadding>
-            <ListItemButton>
+        {isAuthenticated && (
+          <ListItem key='logout' disablePadding >
+            <ListItemButton onClick={handleClick}>
               <ListItemIcon>
               <LogoutIcon />
               </ListItemIcon>
               <ListItemText primary='Log Out' />
             </ListItemButton>
           </ListItem>
+        )}
+        {!isAuthenticated && (
+          <ListItem key='login' >
+              <ListItemText primary='Sign up now to find an event near you!' />
+          </ListItem>
+        )}
       </List>
     </div>
   );

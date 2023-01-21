@@ -8,9 +8,9 @@ const Profile = () => {
     return (
         isAuthenticated && (
             <div className='profile'>
-                <img src={user.picture} alt={user.name}/>
-                <h2>Welcome back, {user.name}!</h2>
-                <p>Logged in as {user.email}</p>
+                <Avatar className='avatar' src={user.picture} alt={user.name} style={{ justifyContent: "center", display: "flex" }}/>
+                <h2 className='welcome-message'>Welcome back, {user.name}!</h2>
+                <p className='welcome-email'>Logged in as {user.email}</p>
                 {/* <JSONPretty data={user} /> */}
                 {/* {JSON.stringify(user, null, 2)} */}
             </div>
