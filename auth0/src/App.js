@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import LogoutButton from './components/LogoutButton';
 import Profile from './components/Profile';
+import NavBar from './components/NavBar'
 import Document from './_document'
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -13,8 +14,8 @@ function App() {
   return (
     <>
       <Document />
+      <NavBar />
       <LogoutButton />
-      <Profile />
     </>
     
   );
