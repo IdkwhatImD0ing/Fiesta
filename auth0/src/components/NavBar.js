@@ -27,6 +27,8 @@ const NavBar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  const { logout } = useAuth0();
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -64,7 +66,7 @@ const NavBar = (props) => {
       <Divider />
       <List>
         {isAuthenticated && (
-          <ListItem key='logout' disablePadding >
+          <ListItem key='logout' disablePadding onClick={() => logout()} >
             <ListItemButton onClick={handleClick}>
               <ListItemIcon>
               <LogoutIcon />
