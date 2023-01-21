@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 2rem;
+  height: 100vh;
+  background: white;
+}
+
+button {
+  width: 100%;
+  background-color: gray;
+  color: #ffffff;
+  font-size: 1.5em;
+  border: none;
+  margin-top: 1em;
+  padding: 0.8em 0;
+  border-radius: 0.4em;
+  font-family: "Roboto Mono", monospace;
+  cursor: pointer;
+}
+
+.container {
+  width: 32em;
+  background-color: #ffffff;
+  padding: 5em;
+  border-radius: 0.6em;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 1em 2em rgba(0, 0, 0, 0.25);
+}
