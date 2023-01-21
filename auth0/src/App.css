@@ -34,3 +34,23 @@ button {
   left: 50%;
   box-shadow: 0 1em 2em rgba(0, 0, 0, 0.25);
 }
+
+img {
+  position: center;
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  padding-top: 2px;
+}
+
+.joinNow {
+  padding: 2 4;
+  background-color: teal;
+  color: white;
+  border-radius: 3px;
+  margin-left: 8px;
+}
