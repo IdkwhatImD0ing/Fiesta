@@ -6,6 +6,8 @@ import NavBar from './components/NavBar';
 import Document from './_document';
 import {useAuth0} from '@auth0/auth0-react';
 import Create from './create';
+import DisplayEvent from './components/DisplayEvent';
+import { Grid } from '@mui/material'
 
 function App() {
   const {isLoading} = useAuth0();
@@ -14,7 +16,15 @@ function App() {
 
   return (
     <>
-      <Create />
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={6}>
+          <DisplayEvent />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <DisplayEvent />
+        </Grid>
+      </Grid>
+      {/* <Create /> */}
     </>
   );
 }
