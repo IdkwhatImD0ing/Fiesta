@@ -1,5 +1,13 @@
-import {Box, Stack, TextField, Typography, Button, Card, CardContent, Grid} from '@mui/material';
-import React, {useState} from 'react';
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+} from '@mui/material';
+import React, {useState, useEffect} from 'react';
 import dayjs from 'dayjs';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
@@ -53,13 +61,15 @@ export default function Create(props) {
         alignItems: 'center',
         bgcolor: 'background.default',
         marginTop: '10vh',
-        marginBottom: '10vh'
+        marginBottom: '10vh',
       }}
     >
       <div className="App">
-        <Typography variant="h2" align="center" >Create Event</Typography>
+        <Typography variant="h2" align="center">
+          Create Event
+        </Typography>
 
-        <Card style={{maxWidth:500, margin:"0 auto", padding: "20px 5px"}}>
+        <Card style={{maxWidth: 500, margin: '0 auto', padding: '20px 5px'}}>
           <CardContent>
             <Grid container spacing={1}>
               <Grid xs={12} sm={6} item>
@@ -84,18 +94,31 @@ export default function Create(props) {
                   />
                 </LocalizationProvider>
               </Grid>
+              <Grid xs={12} sm={12} item>
+                <TextField
+                  id="outlined-basic"
+                  label="Location"
+                  placeholder="Enter location"
+                  variant="outlined"
+                  fullWidth
+                  onChange={(event) => {
+                    setLocation(event.target.value);
+                  }}
+                />
+              </Grid>
               <Grid xs={12} item>
                 <TextField
-                id="outlined-basic"
-                label="Event Description"
-                placeholder="Enter description here"
-                variant="outlined"
-                multiline rows={4}
-                fullWidth
-                onChange={(event) => {
-                  setEventDescription(event.target.value);
-                }}
-              />
+                  id="outlined-basic"
+                  label="Event Description"
+                  placeholder="Enter description here"
+                  variant="outlined"
+                  multiline
+                  rows={4}
+                  fullWidth
+                  onChange={(event) => {
+                    setEventDescription(event.target.value);
+                  }}
+                />
               </Grid>
 
               <Grid xs={12} item>
@@ -107,8 +130,6 @@ export default function Create(props) {
           </CardContent>
         </Card>
       </div>
-
-    
     </Box>
   );
 }

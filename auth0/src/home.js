@@ -1,16 +1,26 @@
 import React from 'react';
 import DisplayEvent from './components/DisplayEvent';
 import {Grid} from '@mui/material';
+import {useAuth0} from '@auth0/auth0-react';
+
+import SpashPage from './spash';
 
 export default function HomePage(props) {
+  const {isAuthenticated} = useAuth0();
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={12} sm={6}>
-        <DisplayEvent />
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <DisplayEvent />
-      </Grid>
-    </Grid>
+    <>
+      {isAuthenticated ? (
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6}>
+            <DisplayEvent />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <DisplayEvent />
+          </Grid>
+        </Grid>
+      ) : (
+        <SpashPage />
+      )}
+    </>
   );
 }

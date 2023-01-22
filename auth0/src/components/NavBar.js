@@ -9,7 +9,7 @@ const NavBar = (props) => {
   const {user, isAuthenticated, logout, loginWithRedirect} = useAuth0();
 
   return (
-    <Box sx={{flexGrow: 1}}>
+    <Box sx={{flexGrow: 1, position: 'absolute'}}>
       <AppBar
         position="fixed"
         sx={{
