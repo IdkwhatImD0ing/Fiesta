@@ -7,7 +7,7 @@ export default function SpashPage(props) {
   return (
     <Box
       width="100%"
-      height="100vh"
+      height="95vh"
       display="flex"
       justifyContent="center"
       alignItems="center"

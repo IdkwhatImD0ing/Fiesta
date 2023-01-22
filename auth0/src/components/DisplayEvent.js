@@ -17,16 +17,24 @@ const DisplayEvent = (props) => {
   const {isAuthenticated} = useAuth0();
   const navigate = useNavigate();
   return (
-    <Grid item justifyContent="center" alignItems="center" xs={12} sm={6}>
+    <Grid
+      item
+      justifyContent="center"
+      alignItems="center"
+      xs={12}
+      sm={6}
+      key={props.id}
+    >
       <Box
+        key={props.id}
         sx={{
           display: 'flex-start',
           flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <Card>
-          <CardContent>
+        <Card key={props.id}>
+          <CardContent key={props.id}>
             <Typography variant="h5" component="div">
               {props.name}
             </Typography>

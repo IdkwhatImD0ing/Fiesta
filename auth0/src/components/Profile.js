@@ -20,12 +20,7 @@ const Profile = () => {
       <Typography variant="h6" noWrap component="div">
         Hello {user.name}
       </Typography>
-      <Button
-        onClick={() => logout()}
-        sx={{
-          color: 'black',
-        }}
-      >
+      <Button color={'inherit'} variant="contained" onClick={() => logout()}>
         Sign Out
       </Button>
     </Stack>

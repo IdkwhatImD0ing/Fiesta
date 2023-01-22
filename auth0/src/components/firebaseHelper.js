@@ -55,8 +55,6 @@ export function leaveEvent(user, eventid) {
   let userId = user.email;
   let colRef = collection(database, userId);
   let docRef = doc(colRef, 'events');
-  console.log(eventid);
-  console.log(user);
   updateDoc(docRef, {[eventid]: deleteField()});
   return;
 }
@@ -103,6 +101,5 @@ export async function getAllEvents(user) {
   let colRef = collection(database, userId);
   let docRef = doc(colRef, 'events');
   const obj = await getDocFromServer(docRef);
-  console.log(obj.data());
   return obj.data();
 }

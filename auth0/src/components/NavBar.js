@@ -10,12 +10,7 @@ const NavBar = (props) => {
 
   return (
     <Box sx={{flexGrow: 1, position: 'absolute'}}>
-      <AppBar
-        position="fixed"
-        sx={{
-          backgroundColor: 'grey',
-        }}
-      >
+      <AppBar position="fixed">
         <Stack
           height="5vh"
           direction="row"
@@ -27,13 +22,17 @@ const NavBar = (props) => {
             paddingRight: '10vw',
           }}
         >
-          <Link to={'/'} style={{textDecoration: 'none', color: 'black'}}>
+          <Link to={'/'} style={{textDecoration: 'none'}}>
             <Typography variant="h6" noWrap component="div">
               Event Finder
             </Typography>
           </Link>
           {!isAuthenticated ? (
-            <Button color="inherit" onClick={() => loginWithRedirect()}>
+            <Button
+              color={'inherit'}
+              variant="contained"
+              onClick={() => loginWithRedirect()}
+            >
               Login / Signup
             </Button>
           ) : (

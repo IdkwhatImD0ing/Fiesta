@@ -60,7 +60,6 @@ export default function Create(props) {
         display: 'flex-start',
         flexDirection: 'column',
         alignItems: 'center',
-        bgcolor: 'background.default',
         marginTop: '10vh',
         marginBottom: '10vh',
       }}

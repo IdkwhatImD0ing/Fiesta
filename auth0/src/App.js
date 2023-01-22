@@ -5,6 +5,7 @@ import Create from './create';
 import HomePage from './home';
 import View from './view';
 import NavBar from './components/NavBar';
+import './App.css';
 
 const router = createBrowserRouter([
   {

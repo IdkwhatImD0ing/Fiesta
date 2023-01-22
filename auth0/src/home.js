@@ -9,7 +9,7 @@ import {getAllEvents} from './components/firebaseHelper';
 export default function HomePage(props) {
   const {isAuthenticated} = useAuth0();
   const {user} = useAuth0();
-  const [events, setEvent] = useState(null);
+  const [events, setEvent] = useState(undefined);
   useEffect(() => {
     getAllEvents(user).then((data) => {
       setEvent(data);
@@ -20,6 +20,7 @@ export default function HomePage(props) {
       {isAuthenticated ? (
         <Box
           height="100%"
+          width="100%"
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -34,7 +35,7 @@ export default function HomePage(props) {
             justifyContent="center"
             spacing={4}
           >
-            {events && Object.keys(events).length === 0 && (
+            {(events === undefined || Object.keys(events).length === 0) && (
               <Typography variant="h4">
                 You have no events! Create one below!
               </Typography>
