@@ -97,7 +97,7 @@ export default function View() {
                   paragraph
                   align="center"
                 >
-                  {state.registered[key].name}
+                  {state.registered[key].nickname}
                 </Typography>
               );
             })
