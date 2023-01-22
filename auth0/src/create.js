@@ -12,8 +12,9 @@ import dayjs from 'dayjs';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
 import {useAuth0} from '@auth0/auth0-react';
-import io from 'socket.io-client';
-const socket = io();
+import {useNavigate} from 'react-router';
+import {socket} from './index';
+import {createEvent} from './components/firebaseHelper';
 
 export default function Create(props) {
   const {user} = useAuth0();
@@ -21,19 +22,19 @@ export default function Create(props) {
   const [eventDescription, setEventDescription] = useState('');
   const [location, setLocation] = useState('');
   const [eventDate, setEventDate] = useState(dayjs(new Date()));
+  const navigate = useNavigate();
 
   useEffect(() => {
+    socket.on('create-success', (data) => {
+      createEvent(user, data.name, data.date, data.channelId);
+      navigate('/view/' + data.channelId);
+    });
+    socket.on('create-error', (data) => {
+      console.log(data);
+    });
     return () => {
-      socket.on('create-success', (data) => {
-        console.log(data);
-      });
-      socket.on('create-error', (data) => {
-        console.log(data);
-      });
-      return () => {
-        socket.off('create-success');
-        socket.off('create-error');
-      };
+      socket.off('create-success');
+      socket.off('create-error');
     };
   }, []);
 
