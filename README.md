@@ -1,8 +1,11 @@
 # Fiesta
 
 [Youtube Link](https://www.youtube.com/watch?v=OjV4-Km9sWw)
+
 [Devpost Link](https://devpost.com/software/fista-finder)
+
 [Demo Link](https://fiesta.hop.sh/)
+
 
 ## Inspiration
 As software engineers, we are always looking for ways to make people's lives easier and more convenient. Fiesta was born out of the need for a better event planning experience. Many event coordinators have faced the common problem of uncertainty of attendance and lack of a streamlined registration process. After hearing stories and experiences of these struggles, we knew there had to be a better solution. That's why we created Fiesta, an app that allows for easy registration and eliminates the guesswork involved in event planning, giving event coordinators the information they need to plan events seamlessly and efficiently.
