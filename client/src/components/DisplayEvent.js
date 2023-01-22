@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import {useNavigate} from 'react-router';
 import {useAuth0} from '@auth0/auth0-react';
-import {animated, useSpring, useChain} from 'react-spring';
+import {animated} from 'react-spring';
 
 const DisplayEvent = (props) => {
   // console.log(data.example[0].name)

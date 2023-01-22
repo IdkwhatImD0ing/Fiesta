@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useCallback} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {useParams} from 'react-router';
 import {useReadChannelState} from '@onehop/react';
 import {Box, Typography, Button, Divider} from '@mui/material';
@@ -7,7 +7,7 @@ import {useAuth0} from '@auth0/auth0-react';
 import {joinEvent, leaveEvent} from './components/firebaseHelper';
 import {socket} from './index';
 import Loading from './loading';
-import {animated, useSpring, useChain} from 'react-spring';
+import {animated, useSpring} from 'react-spring';
 
 export default function View() {
   const [registered, setRegistered] = useState(false);
