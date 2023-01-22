@@ -36,8 +36,14 @@ io.on('connection', (socket) => {
   // Creating a trip
   socket.on('create', async (data) => {
     try {
-      const {name, date, location, user} = data;
-      const eventObject = createInitialState(name, date, location, user);
+      const {name, date, location, user, description} = data;
+      const eventObject = createInitialState(
+        name,
+        date,
+        location,
+        user,
+        description,
+      );
 
       const channelId = createChannelId();
       const channel = await hop.channels.create(
@@ -50,9 +56,9 @@ io.on('connection', (socket) => {
         },
       );
 
-      socket.emit('join-sucecss', {channelId: channelId});
+      socket.emit('create-sucecss', {channelId: channelId});
     } catch {
-      socket.emit('join-error', {message: 'Error Creating Channel!'});
+      socket.emit('create-error', {message: 'Error Creating Channel!'});
     }
   });
 

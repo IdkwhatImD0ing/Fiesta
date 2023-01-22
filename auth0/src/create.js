@@ -1,13 +1,33 @@
 import {Box, Stack, TextField, Typography, Button} from '@mui/material';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import dayjs from 'dayjs';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DateTimePicker, LocalizationProvider} from '@mui/x-date-pickers';
+import {useAuth0} from '@auth0/auth0-react';
+import io from 'socket.io-client';
+const socket = io();
 
 export default function Create(props) {
+  const {user} = useAuth0();
   const [eventName, setEventName] = useState('');
   const [eventDescription, setEventDescription] = useState('');
+  const [location, setLocation] = useState('');
   const [eventDate, setEventDate] = useState(dayjs(new Date()));
+
+  useEffect(() => {
+    return () => {
+      socket.on('create-success', (data) => {
+        console.log(data);
+      });
+      socket.on('create-error', (data) => {
+        console.log(data);
+      });
+      return () => {
+        socket.off('create-success');
+        socket.off('create-error');
+      };
+    };
+  }, []);
 
   const handleSubmit = () => {
     if (eventName === '' || eventDescription === '' || eventDate === '') {
@@ -17,9 +37,11 @@ export default function Create(props) {
     const event = {
       name: eventName,
       description: eventDescription,
+      location: location,
       date: eventDate,
+      user: user,
     };
-    console.log(event);
+    socket.emit('create', event);
   };
   return (
     <Box
@@ -56,6 +78,14 @@ export default function Create(props) {
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
+        <TextField
+          id="outlined-basic"
+          label="Location"
+          variant="outlined"
+          onChange={(event) => {
+            setLocation(event.target.value);
+          }}
+        />
         <TextField
           id="outlined-basic"
           label="Event Description"
