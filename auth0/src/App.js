@@ -16,14 +16,7 @@ function App() {
 
   return (
     <>
-      <Grid container spacing={4}>
-        <Grid item xs={12} sm={6}>
-          <DisplayEvent />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <DisplayEvent />
-        </Grid>
-      </Grid>
+      
       {/* <Create /> */}
     </>
   );
