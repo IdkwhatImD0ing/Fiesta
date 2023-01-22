@@ -6,11 +6,15 @@ require('dotenv').config();
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: '*',
+  },
+});
 
 const {Hop, ChannelType} = require('@onehop/js');
 const hop = new Hop(process.env.HOP_KEY);
-const {createInitialState} = require('./initial');
+const createInitialState = require('./initial');
 
 const createChannelId = () => {
   var result = '';
@@ -36,9 +40,14 @@ io.on('connection', (socket) => {
   // Creating a trip
   socket.on('create', async (data) => {
     try {
-      const {name, date, location, user} = data;
-      const eventObject = createInitialState(name, date, location, user);
-
+      const {name, date, location, user, description} = data;
+      const eventObject = createInitialState(
+        name,
+        date,
+        location,
+        user,
+        description,
+      );
       const channelId = createChannelId();
       const channel = await hop.channels.create(
         ChannelType.UNPROTECTED,
@@ -50,47 +59,51 @@ io.on('connection', (socket) => {
         },
       );
 
-      socket.emit('join-sucecss', {channelId: channelId});
+      socket.emit('create-success', {
+        name: eventObject.name,
+        date: eventObject.date,
+        channelId: channelId,
+      });
     } catch {
-      socket.emit('join-error', {message: 'Error Creating Channel!'});
+      socket.emit('create-error', {message: 'Error Creating Channel!'});
     }
   });
 
-  // Lets a user join a trip
-  socket.on('join-trip', async (data) => {
+  // Lets a user join an event
+  socket.on('join', async (data) => {
     try {
       const {channelId, user} = data;
       const channel = await hop.channels.get(`${channelId}`);
 
       //Updating the state
-      const currentState = JSON.parse(JSON.stringify(channel.state.registered));
+      let currentState = JSON.parse(JSON.stringify(channel.state.registered));
       currentState = {
         ...currentState,
-        [user.id]: user,
+        [user.email]: user,
       };
 
-      hop.channels.patchState(channelId, {registered, currentState});
+      hop.channels.patchState(channelId, {registered: currentState});
 
-      socket.emit('join-trip-success', {message: 'Successfully Joined Trip!'});
+      socket.emit('join-success', {message: 'Successfully Joined Trip!'});
     } catch {
-      socket.emit('join-trip-error', {message: 'Error Joining Trip!'});
+      socket.emit('join-error', {message: 'Error Joining Trip!'});
     }
   });
 
-  // Lets a user leave a trip
-  socket.on('leave-trip', async (data) => {
+  // Lets a user leave an event
+  socket.on('leave', async (data) => {
     try {
       const {channelId, user} = data;
       const channel = await hop.channels.get(`${channelId}`);
 
       //Updating the state
       const currentState = JSON.parse(JSON.stringify(channel.state.registered));
-      delete currentState[user.id];
+      delete currentState[user.email];
 
-      hop.channels.patchState(channelId, {registered, currentState});
-      socket.emit('leave-trip-success', {message: 'Successfully Left Trip!'});
+      hop.channels.patchState(channelId, {registered: currentState});
+      socket.emit('leave-success', {message: 'Successfully Left Trip!'});
     } catch {
-      socket.emit('leave-trip-error', {message: 'Error Leaving Trip!'});
+      socket.emit('leave-error', {message: 'Error Leaving Trip!'});
     }
   });
 });
