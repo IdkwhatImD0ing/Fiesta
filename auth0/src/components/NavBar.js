@@ -1,4 +1,4 @@
-import {AppBar, Typography, Stack, Button, Box, Toolbar} from '@mui/material';
+import {AppBar, Typography, Stack, Button, Box} from '@mui/material';
 
 import {useAuth0} from '@auth0/auth0-react';
 import Profile from './Profile';

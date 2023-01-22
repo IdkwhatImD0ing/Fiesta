@@ -6,7 +6,6 @@ import {
   setDoc,
   collection,
   getDocFromServer,
-  deleteDoc,
 } from 'firebase/firestore';
 
 export function changeName(user, name) {

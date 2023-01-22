@@ -45,7 +45,7 @@ export default function View() {
       socket.off('join-error');
       socket.off('leave-error');
     };
-  }, []);
+  }, [id, user]);
 
   if (state) {
     return (

@@ -36,7 +36,7 @@ export default function Create(props) {
       socket.off('create-success');
       socket.off('create-error');
     };
-  }, []);
+  }, [navigate, user]);
 
   const handleSubmit = () => {
     if (eventName === '' || eventDescription === '' || eventDate === '') {

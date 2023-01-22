@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import DisplayEvent from './components/DisplayEvent';
 import {Grid, Box, Button, Typography, Stack} from '@mui/material';
 import {useAuth0} from '@auth0/auth0-react';
-import EventDetails from './events/EventDetails';
 
 import SpashPage from './spash';
 import {getAllEvents} from './components/firebaseHelper';

@@ -28,7 +28,9 @@ const createChannelId = () => {
 
 // Home Page
 app.get('/', (req, res) => {
-  res.send('Backend Server Home!');
+  res.send(
+    'Backend Server Home! Go to /id to make sure the service is working!',
+  );
 });
 
 app.get('/id', async (req, res) => {
