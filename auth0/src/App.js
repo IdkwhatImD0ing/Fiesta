@@ -4,19 +4,35 @@ import {useAuth0} from '@auth0/auth0-react';
 import Create from './create';
 import HomePage from './home';
 import View from './view';
+import NavBar from './components/NavBar';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: (
+      <>
+        <NavBar />
+        <HomePage />
+      </>
+    ),
   },
   {
     path: '/create',
-    element: <Create />,
+    element: (
+      <>
+        <NavBar />
+        <Create />
+      </>
+    ),
   },
   {
     path: '/view/:id',
-    element: <View />,
+    element: (
+      <>
+        <NavBar />
+        <View />
+      </>
+    ),
   },
 ]);
 

@@ -3,10 +3,10 @@ import {AppBar, Typography, Stack, Button, Box, Toolbar} from '@mui/material';
 import {useAuth0} from '@auth0/auth0-react';
 import Profile from './Profile';
 import * as React from 'react';
+import {Link} from 'react-router-dom';
 
 const NavBar = (props) => {
-  const {window} = props;
-  const {user, isAuthenticated, logout, loginWithRedirect} = useAuth0();
+  const {isAuthenticated, loginWithRedirect} = useAuth0();
 
   return (
     <Box sx={{flexGrow: 1, position: 'absolute'}}>
@@ -27,9 +27,11 @@ const NavBar = (props) => {
             paddingRight: '10vw',
           }}
         >
-          <Typography variant="h6" noWrap component="div">
-            Event Finder
-          </Typography>
+          <Link to={'/'} style={{textDecoration: 'none', color: 'black'}}>
+            <Typography variant="h6" noWrap component="div">
+              Event Finder
+            </Typography>
+          </Link>
           {!isAuthenticated ? (
             <Button color="inherit" onClick={() => loginWithRedirect()}>
               Login / Signup
