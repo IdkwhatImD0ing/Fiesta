@@ -34,7 +34,7 @@ app.get('/id', async (req, res) => {
 
 io.on('connection', (socket) => {
   // Creating a trip
-  socket.on('join', async (data) => {
+  socket.on('create', async (data) => {
     try {
       const {name, date, location, user} = data;
       const eventObject = createInitialState(name, date, location, user);
