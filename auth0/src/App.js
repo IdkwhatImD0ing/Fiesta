@@ -41,7 +41,7 @@ const router = createBrowserRouter([
 function App() {
   const {isLoading} = useAuth0();
   if (isLoading) return <Loading />;
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;
