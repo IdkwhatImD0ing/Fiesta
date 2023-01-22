@@ -1,5 +1,5 @@
 import React from 'react';
-import EventDetails from '../events/EventDetails'
+
 import {
   Card,
   CardActions,
@@ -7,82 +7,47 @@ import {
   Button,
   Typography,
   Box,
-  Grid
+  Grid,
 } from '@mui/material';
 import {useAuth0} from '@auth0/auth0-react';
-import { useState} from 'react';
 
 const DisplayEvent = (props) => {
   // console.log(data.example[0].name)
-  const {loginWithRedirect, isAuthenticated} = useAuth0();
-  
-
-
-
-  const [detail, setDetail] = useState(EventDetails);
+  const {isAuthenticated} = useAuth0();
   return (
-    <Grid container
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-      spacing={15}
-      rowSpacing={1}>
-      
-    {detail.map((event) => (
-      
-      <Box 
-        width="300px" 
-        
+    <Grid item justifyContent="center" alignItems="center" xs={12} sm={6}>
+      <Box
         sx={{
           display: 'flex-start',
           flexDirection: 'column',
           alignItems: 'center',
           marginTop: '10vh',
           marginRight: '10px',
-          marginLeft: '10px'
+          marginLeft: '10px',
         }}
-
       >
-        
-       
-          <Card>
+        <Card>
           <CardContent>
             <Typography variant="h5" component="div">
-              {event.name}
+              {props.name}
             </Typography>
-            <Typography variant="body2" color='text.secondary'>
-              {event.description}
-              <br/>
-              {event.location}
-              <br/>
-              {event.date}
+            <Typography variant="body2" color="text.secondary">
+              {props.location}
+              <br />
+              {props.date}
             </Typography>
           </CardContent>
           <CardActions>
             {isAuthenticated && (
               <CardActions style={{justifyContent: 'center'}}>
-                <Button variant="contained" size="small">
-                  Sign up
-                </Button>
-                <Button size='small'>Learn More</Button>
+                <Button size="small">Learn More</Button>
               </CardActions>
             )}
           </CardActions>
-          </Card>
-        
-        
-        
+        </Card>
       </Box>
-      
-    ))}
     </Grid>
-      
-    
-    
-      
   );
-    
-  
 };
 
 export default DisplayEvent;
