@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import DisplayEvent from './components/DisplayEvent';
 import {Grid} from '@mui/material';
 import {useAuth0} from '@auth0/auth0-react';
@@ -10,13 +10,17 @@ export default function HomePage(props) {
   return (
     <>
       {isAuthenticated ? (
+
+
+
         <Grid container spacing={4}>
           <Grid item xs={12} sm={6}>
-            <DisplayEvent />
+            <Fragment>
+              <DisplayEvent />
+            </Fragment>
+            
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <DisplayEvent />
-          </Grid>
+
         </Grid>
       ) : (
         <SpashPage />
