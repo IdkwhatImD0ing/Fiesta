@@ -1,25 +1,34 @@
 import React from 'react';
 import {useAuth0} from '@auth0/auth0-react';
-import JSONPretty from 'react-json-pretty';
-import Avatar from '@mui/material/Avatar';
+import {Avatar, Button, Stack, Typography} from '@mui/material';
 
 const Profile = () => {
-  const {user, isAuthenticated} = useAuth0();
+  const {user, logout} = useAuth0();
   return (
-    isAuthenticated && (
-      <div className="profile">
-        <Avatar
-          className="avatar"
-          src={user.picture}
-          alt={user.name}
-          style={{justifyContent: 'center', display: 'flex'}}
-        />
-        <h2 className="welcome-message">Welcome back, {user.name}!</h2>
-        <p className="welcome-email">Logged in as {user.email}</p>
-        {/* <JSONPretty data={user} /> */}
-        {/* {JSON.stringify(user, null, 2)} */}
-      </div>
-    )
+    <Stack
+      direction="row"
+      spacing={2}
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Avatar
+        className="avatar"
+        src={user.picture}
+        alt={user.name}
+        style={{justifyContent: 'center', display: 'flex'}}
+      />
+      <Typography variant="h6" noWrap component="div">
+        Hello {user.name}
+      </Typography>
+      <Button
+        onClick={() => logout()}
+        sx={{
+          color: 'black',
+        }}
+      >
+        Sign Out
+      </Button>
+    </Stack>
   );
 };
 
