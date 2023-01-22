@@ -99,9 +99,11 @@ export function deleteEvent(user, eventid) {
   return;
 }
 
-export function getAllEvents(user) {
+export async function getAllEvents(user) {
   let userId = user.email;
   let colRef = collection(database, userId);
   let docRef = doc(colRef, 'events');
-  return getDocFromServer(docRef);
+  const obj = await getDocFromServer(docRef);
+  console.log(obj.data());
+  return obj.data();
 }

@@ -22,7 +22,7 @@ root.render(
     clientId={clientId}
     redirectUri={window.location.origin}
   >
-    <NavBar />
+    
     <App />
   </Auth0Provider>,
   document.getElementById('root'),

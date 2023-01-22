@@ -9,11 +9,13 @@ import {
   Box,
   Grid,
 } from '@mui/material';
+import {useNavigate} from 'react-router';
 import {useAuth0} from '@auth0/auth0-react';
 
 const DisplayEvent = (props) => {
   // console.log(data.example[0].name)
   const {isAuthenticated} = useAuth0();
+  const navigate = useNavigate();
   return (
     <Grid item justifyContent="center" alignItems="center" xs={12} sm={6}>
       <Box
@@ -21,9 +23,6 @@ const DisplayEvent = (props) => {
           display: 'flex-start',
           flexDirection: 'column',
           alignItems: 'center',
-          marginTop: '10vh',
-          marginRight: '10px',
-          marginLeft: '10px',
         }}
       >
         <Card>
@@ -32,15 +31,20 @@ const DisplayEvent = (props) => {
               {props.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {props.location}
-              <br />
               {props.date}
             </Typography>
           </CardContent>
           <CardActions>
             {isAuthenticated && (
               <CardActions style={{justifyContent: 'center'}}>
-                <Button size="small">Learn More</Button>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    navigate('/view/' + props.id);
+                  }}
+                >
+                  Learn More
+                </Button>
               </CardActions>
             )}
           </CardActions>
