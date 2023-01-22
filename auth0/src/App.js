@@ -4,6 +4,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import {useAuth0} from '@auth0/auth0-react';
 import Create from './create';
 import HomePage from './home';
+import View from './view';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: '/create',
     element: <Create />,
+  },
+  {
+    path: '/view/:id',
+    element: <View />,
   },
 ]);
 

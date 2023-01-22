@@ -33,12 +33,21 @@ export function changeEmail(user, email) {
   return;
 }
 
-export function joinEvent(user, eventid, eventName, eventDate) {
+export function joinEvent(user, eventName, eventDate, eventid) {
   // Event should be a string
   let userId = user.email;
   let colRef = collection(database, userId);
   let docRef = doc(colRef, 'events');
-  setDoc(docRef, {[eventid]: {eventName, eventDate}}, {merge: true});
+  setDoc(
+    docRef,
+    {
+      [eventid]: {
+        eventName: eventName,
+        eventDate: eventDate,
+      },
+    },
+    {merge: true},
+  );
   return;
 }
 
@@ -47,24 +56,46 @@ export function leaveEvent(user, eventid) {
   let userId = user.email;
   let colRef = collection(database, userId);
   let docRef = doc(colRef, 'events');
+  console.log(eventid);
+  console.log(user);
   updateDoc(docRef, {[eventid]: deleteField()});
   return;
 }
 
 // Events created by the user
-export function createEvent(user, eventName, eventDate) {
+export function createEvent(user, eventName, eventDate, eventid) {
   let userId = user.email;
   let colRef = collection(database, userId);
   let docRef = doc(colRef, 'myEvents');
-  setDoc(docRef, {[eventName]: {eventDate}}, {merge: true});
+  setDoc(
+    docRef,
+    {
+      [eventid]: {
+        eventName: eventName,
+        eventDate: eventDate,
+      },
+    },
+    {merge: true},
+  );
+  docRef = doc(colRef, 'events');
+  setDoc(
+    docRef,
+    {
+      [eventid]: {
+        eventName: eventName,
+        eventDate: eventDate,
+      },
+    },
+    {merge: true},
+  );
   return;
 }
 
-export function deleteEvent(user, eventName) {
+export function deleteEvent(user, eventid) {
   let userId = user.email;
   let colRef = collection(database, userId);
   let docRef = doc(colRef, 'myEvents');
-  updateDoc(docRef, {[eventName]: deleteField()});
+  updateDoc(docRef, {[eventid]: deleteField()});
   return;
 }
 
