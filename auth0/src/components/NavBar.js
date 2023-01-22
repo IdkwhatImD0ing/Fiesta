@@ -23,8 +23,8 @@ const NavBar = (props) => {
           }}
         >
           <Link to={'/'} style={{textDecoration: 'none'}}>
-            <Typography variant="h6" noWrap component="div">
-              Event Finder
+            <Typography variant="h5" color="black" noWrap component="div">
+              Fiesta
             </Typography>
           </Link>
           {!isAuthenticated ? (

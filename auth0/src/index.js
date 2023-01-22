@@ -22,7 +22,7 @@ const themeOptions = createTheme({
     },
     background: {
       default: '#000000',
-    },
+    }
   },
 });
 

@@ -18,7 +18,7 @@ export default function SpashPage(props) {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography variant="h1">Welcome to Event Coordinator</Typography>
+        <Typography textAlign="center" align="left" variant="h1">Welcome to Fiesta</Typography>
         <Typography variant="h3">The #1 tool for event planning</Typography>
         <Button variant="contained" onClick={() => loginWithRedirect()}>
           Get Started Now!
