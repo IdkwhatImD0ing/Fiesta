@@ -1,4 +1,4 @@
-import {Box, Stack, TextField, Typography, Button} from '@mui/material';
+import {Box, Stack, TextField, Typography, Button, Card, CardContent, Grid} from '@mui/material';
 import React, {useState} from 'react';
 import dayjs from 'dayjs';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
@@ -31,44 +31,62 @@ export default function Create(props) {
         alignItems: 'center',
         bgcolor: 'background.default',
         marginTop: '10vh',
+        marginBottom: '10vh'
       }}
     >
-      <Stack
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        spacing={5}
-      >
-        <Typography variant="h2">Create Event</Typography>
-        <TextField
-          id="outlined-basic"
-          label="Event Name"
-          variant="outlined"
-          onChange={(event) => {
-            setEventName(event.target.value);
-          }}
-        />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DateTimePicker
-            label="Date"
-            value={eventDate}
-            onChange={(val) => setEventDate(val)}
-            renderInput={(params) => <TextField {...params} />}
-          />
-        </LocalizationProvider>
-        <TextField
-          id="outlined-basic"
-          label="Event Description"
-          variant="outlined"
-          multiline
-          onChange={(event) => {
-            setEventDescription(event.target.value);
-          }}
-        />
-        <Button variant="contained" onClick={handleSubmit}>
-          Create Event
-        </Button>
-      </Stack>
+      <div className="App">
+        <Typography variant="h2" align="center" >Create Event</Typography>
+
+        <Card style={{maxWidth:500, margin:"0 auto", padding: "20px 5px"}}>
+          <CardContent>
+            <Grid container spacing={1}>
+              <Grid xs={12} sm={6} item>
+                <TextField
+                  id="outlined-basic"
+                  label="Event Name"
+                  placeholder="Enter event name"
+                  variant="outlined"
+                  fullWidth
+                  onChange={(event) => {
+                    setEventName(event.target.value);
+                  }}
+                />
+              </Grid>
+              <Grid xs={12} sm={6} item>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DateTimePicker
+                    label="Date"
+                    value={eventDate}
+                    onChange={(val) => setEventDate(val)}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              </Grid>
+              <Grid xs={12} item>
+                <TextField
+                id="outlined-basic"
+                label="Event Description"
+                placeholder="Enter description here"
+                variant="outlined"
+                multiline rows={4}
+                fullWidth
+                onChange={(event) => {
+                  setEventDescription(event.target.value);
+                }}
+              />
+              </Grid>
+
+              <Grid xs={12} item>
+                <Button variant="contained" fullWidth onClick={handleSubmit}>
+                  Create Event
+                </Button>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </div>
+
+    
     </Box>
   );
 }
