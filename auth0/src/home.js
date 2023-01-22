@@ -35,6 +35,11 @@ export default function HomePage(props) {
             justifyContent="center"
             spacing={4}
           >
+            {events && Object.keys(events).length === 0 && (
+              <Typography variant="h4">
+                You have no events! Create one below!
+              </Typography>
+            )}
             <Button variant="contained" href="/create">
               Create an Event!
             </Button>
