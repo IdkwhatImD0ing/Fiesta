@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {useParams} from 'react-router';
 import {useReadChannelState} from '@onehop/react';
-import {Box, Typography, Button} from '@mui/material';
+import {Box, Typography, Button, Divider} from '@mui/material';
 import {Stack} from '@mui/system';
 import {useAuth0} from '@auth0/auth0-react';
 import {joinEvent, leaveEvent} from './components/firebaseHelper';
 import {socket} from './index';
+import Loading from './loading';
 
 export default function View() {
   const [registered, setRegistered] = useState(false);
@@ -46,16 +47,18 @@ export default function View() {
       socket.off('leave-error');
     };
   }, [id, user]);
-
+  if (!state) {
+    return <Loading />;
+  }
   if (state) {
     return (
       <Box
         width="100%"
-        height="100"
+        height="100%"
         sx={{
-          display: 'flex-start',
+          display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           marginTop: '10vh',
         }}
@@ -72,36 +75,68 @@ export default function View() {
               {state.name}
             </Typography>
           </Box>
-          <Typography variant="h5" align="center">
-            Created by: {state.creator.name}
+          <Typography
+            variant="h5"
+            align="center"
+            sx={{
+              marginBottom: '30px',
+            }}
+          >
+            Created by: {state.creator.nickname}
+          </Typography>
+          <Typography
+            width="400px"
+            variant="h4"
+            align="center"
+            sx={{
+              marginBottom: '20px',
+            }}
+          >
+            Date: {new Date(state.date).toString()}
           </Typography>
           <Typography variant="h4" align="center">
-            {state.date}
+            Location: {state.location}
           </Typography>
-          <Typography variant="h4" align="center">
-            {state.location}
-          </Typography>
-          <Typography variant="h6" paragraph align="center">
-            {state.description}
-          </Typography>
-          <Typography variant="h6" paragraph align="center">
-            Attending users:
-          </Typography>
-          {
-            // Go through each key in the state.registered object
-            Object.keys(state.registered).map((key) => {
-              return (
-                <Typography
-                  key={state.registered[key].email}
-                  variant="h6"
-                  paragraph
-                  align="center"
-                >
-                  {state.registered[key].nickname}
-                </Typography>
-              );
-            })
-          }
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            spacing={5}
+            sx={{
+              marginTop: '50px',
+            }}
+          >
+            <Typography width="300px" variant="h6">
+              {state.description}
+            </Typography>
+            <Divider orientation="vertical" flexItem />
+            <Stack
+              width="300px"
+              direction="column"
+              alignItems="center"
+              justifyContent="flex-start"
+            >
+              <Typography variant="h6" paragraph align="center">
+                Attending users:
+              </Typography>
+              {
+                // Go through each key in the state.registered object
+                Object.keys(state.registered).map((key) => {
+                  return (
+                    <Typography
+                      key={state.registered[key].email}
+                      variant="h6"
+                      paragraph
+                      align="center"
+                    >
+                      {state.registered[key].nickname}
+                    </Typography>
+                  );
+                })
+              }
+            </Stack>
+          </Stack>
+
           {!isAuthenticated ? (
             <Typography variant="h6" paragraph align="center">
               Please log in to register for this event!

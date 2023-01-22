@@ -6,6 +6,7 @@ import HomePage from './home';
 import View from './view';
 import NavBar from './components/NavBar';
 import './App.css';
+import Loading from './loading';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
 
 function App() {
   const {isLoading} = useAuth0();
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   return <RouterProvider router={router} />;
 }
 
