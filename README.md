@@ -4,7 +4,7 @@
 
 [Devpost Link](https://devpost.com/software/fista-finder)
 
-[Demo Link](https://fiesta.hop.sh/)
+[Demo Link](https://fiesta-one.vercel.app/)
 
 
 ## Inspiration
